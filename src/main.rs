@@ -37,14 +37,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 async fn test_scrape(book_id: u64) -> Result<(), Box<dyn std::error::Error>> {
-    println!("Testing scrape for book ID: {}", book_id);
-    
     let html = scrape_book_page(book_id).await?;
-    println!("HTML scraped successfully, length: {}", html.len());
-    
     let json = extract_next_data(&html)?;
-    println!("Extracted JSON data:");
     println!("{}", serde_json::to_string_pretty(&json)?);
-    
     Ok(())
 }
